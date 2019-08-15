@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 
 import './App.css';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
 import Search from './components/users/Search'
+import About from './components/pages/About'
+
 class App extends Component {
   state = {
     users: [],
@@ -27,13 +30,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Search searchUsers={this.searchUsers} />
-          <Users loading={this.state.loading} users={this.state.users} />
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" render={props => (
+                <Fragment>
+                  <Search searchUsers={this.searchUsers} />
+                  <Users loading={this.state.loading} users={this.state.users} />
+                </Fragment>
+              )}
+              />
+              <Route exact path='/about' component={About} />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }

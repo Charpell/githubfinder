@@ -28,17 +28,28 @@ class App extends Component {
     this.setState({ users: res.data.items, loading: false })
   }
 
+  clearUsers = () => {
+    this.setState({ users: [], loading: false })
+  }
+
   render() {
     return (
       <Router>
         <div className="App">
           <Navbar />
           <div className="container">
-            <Switch>
+            <Switch>  
               <Route exact path="/" render={props => (
                 <Fragment>
-                  <Search searchUsers={this.searchUsers} />
-                  <Users loading={this.state.loading} users={this.state.users} />
+                  <Search 
+                    searchUsers={this.searchUsers} 
+                    clearUsers={this.clearUsers} 
+                    showClear={this.state.users.length > 0 ? true : false } 
+                  />
+                  <Users 
+                    loading={this.state.loading} 
+                    users={this.state.users} 
+                  />
                 </Fragment>
               )}
               />

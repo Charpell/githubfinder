@@ -2,9 +2,12 @@ import React, { Component, Fragment } from 'react'
 import Spinner from '../layout/Spinner'
 import { Link } from 'react-router-dom';
 
+import Repos from '../repos/Repos';
+
 export default class User extends Component {
   componentDidMount() {
     this.props.getUser(this.props.match.params.login)
+    this.props.getUserRepos(this.props.match.params.login)
   }
 
   render() {
@@ -93,6 +96,7 @@ export default class User extends Component {
         <div className='badge badge-light'>Public Repos: {public_repos}</div>
         <div className='badge badge-dark'>Public Gists: {public_gists}</div>
       </div>
+      <Repos repos={this.props.repos} />
     </Fragment>
     )
   }

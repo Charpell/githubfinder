@@ -9,6 +9,8 @@ import Search from './components/users/Search'
 import About from './components/pages/About'
 import Alert from './components/layout/Alert'
 import User from './components/users/User';
+import GithubState from './context/github/githubState'
+
 
 const App = () => {
   const [users, setUsers ] = useState([]);
@@ -53,7 +55,8 @@ const App = () => {
   }
   
   return (
-    <Router>
+    <GithubState>
+      <Router>
       <div className="App">
         <Navbar />
         <div className="container">
@@ -88,7 +91,8 @@ const App = () => {
           </Switch>
         </div>
       </div>
-    </Router>
+      </Router>
+    </GithubState>
   );
 }
 
